@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="./index.css" />
+    <title>搜索</title>
+    <script src="../lib/jquery.min.js"></script>
+    <script src="../app.js"></script>
+    <script src="./index.js"></script>
+    <link rel="manifest" href="/manifest.webapp">
+</head>
+
+<body>
+    <p>
+        <label>输入城市：</label>
+        <input type="text" id="city" class="item" value="科学大道口" />
+    </p>
+    <p>
+        <label>当前定位:</label>
+        <label id="gps_city">广州</label>
+        <input id="cid" type="hidden" value="" />
+        <input id="lct" type="hidden" value="23.125;113.361" />
+    </p>
+    <p>        
+        <input id='api' type="radio" class="item" />
+        <label>精准定位使用V3接口</label>
+    </p>
+    <p>        
+        <label>当前定位类型:</label>
+        <label id="lctt">城市</label>
+    </p>
+</body>
+
+<!--导航键-->
+<footer id="softkeys">
+    <div id="softkey-left">车辆</div>
+    <div id="softkey-center">城市</div>
+    <div id="softkey-right">定位</div>
+</footer>
+
+</html>

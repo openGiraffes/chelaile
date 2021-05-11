@@ -1,0 +1,25 @@
+{
+  "name": "车来了",
+  "description": "车来了 KaiOS 版",
+  "version": "1.0",
+  "launch_path": "/index.html",
+  "type": "certified",
+  "origin": "app://kai.michael.chelaile",
+  "icons": {
+    "120": "/img/icon120x120.png"
+  },
+  "developer": {
+    "name": "michael_eddy",
+    "url": "https://www.chelaile.net.cn/"
+  },
+  "permissions": {
+    "attention": {},
+    "browser": {},
+    "mobilenetwork": {},
+    "systemXHR": {},
+    "geolocation": {},
+    "spatialnavigation-app-manage": {}
+  },
+  "ime_default_softkey_bar": true,
+  "theme_color": "#00a1d6"
+}
