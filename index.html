@@ -13,26 +13,24 @@
 
 <body>
     <p>
-        <label>输入城市：</label>
-        <input type="text" id="city" class="item" value="科学大道口" />
+        <label>输入站点名称：</label>
+        <input type="text" id="city" class="item" />
     </p>
     <p>
         <label>当前定位:</label>
-        <label id="gps_city">广州</label>
+        <label id="gps_city">定位中...</label>
         <input id="cid" type="hidden" value="" />
-        <input id="lct" type="hidden" value="23.125;113.361" />
     </p>
-    <p>        
-        <input id='api' type="radio" class="item" />
+    <p>
+        <input id='api' type="radio" class="item" checked />
         <label>精准定位使用V3接口</label>
     </p>
-    <p>        
+    <p>
         <label>当前定位类型:</label>
         <label id="lctt">城市</label>
     </p>
 </body>
 
-<!--导航键-->
 <footer id="softkeys">
     <div id="softkey-left">车辆</div>
     <div id="softkey-center">城市</div>

@@ -1,4 +1,4 @@
-/* First of all */
+
 * {
   box-sizing: border-box;
   margin: 0 auto;
@@ -6,7 +6,6 @@
   text-align: center;
 }
 
-/* Soft Keys */
 #softkeys {
   z-index: 100;
   position: fixed;
