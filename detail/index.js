@@ -10,6 +10,16 @@ $(function () {
     document.activeElement.addEventListener('keydown', handleKeydown);
 });
 
+function loadLineInfo() {
+    var url = 'http://api.chelaile.net.cn/bus/line!lineDetail.action?sign=' + sign + '&cityId=' + cid + '&geo_type=gcj&lineId=' + lid +
+        '&isNewLineDetail=1&s=android&last_src=app_xiaomi_store&geo_lng=' + lng + '&geo_lat=' + lat + '&v=' + ver;
+    var result = $.getApi(url, 'text');
+    let data = JSON.parse(result.replace("**YGKJ", "").replace("YGKJ##", ""));
+    var stations = data.jsonr.data.stations;
+    for (var idx = 0; idx < stations.length; idx++) {
+
+    }
+}
 function loadDetail(cid, lat, lng, lid, od) {
     var url = 'http://api.chelaile.net.cn/bus/line!busesDetail.action?sign=' + sign + '&cityId=' + cid + '&lat=' + lat + '&geo_type=gcj&gpstype=gcj&geo_lt=5&screenDensity=3.0&flpolicy=1&stats_referer=searchHistory&targetOrder='
         + od + '&lineId=' + lid + '&s=android&geo_lng=' + lng + '&geo_lat=' + lat + '&v=' + ver;
@@ -19,12 +29,16 @@ function loadDetail(cid, lat, lng, lid, od) {
         var item = data.jsonr.data;
         var rm = item.tip.desc;
         var bc = item.buses.length;
+        var desc = '';
         $('#line').text(item.line.name + '路');
         if (rm != '') {
             var r = rm.match(/\d分钟/);
             if (r != null && r.length > 0)
-                $('#remain').text(r[0]);
+                desc = r[0];
         }
+        if (desc == '')
+            desc = item.line.ksDesc;
+        $('#remain').text(desc);
         $('#end').text(item.line.endSn);
         $('#count').text(bc);
         for (var index = 0; index < bc; index++) {
@@ -58,6 +72,10 @@ function handleKeydown(e) {
         case 'Backspace':
         case 'SoftRight':
             window.location.href = '../info/index.html?cid=' + cid + '&lat=' + lat + '&lng=' + lng;
+            break;
+        case 'Enter':
+            $('#container').empty();
+            loadDetail(cid, lat, lng, lid, od);
             break;
     }
 }

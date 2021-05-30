@@ -14,7 +14,6 @@ $(function () {
         var keyword = e.target.value;
         var cityName = $('#gps_city').text();
         var result = $.getApi('http://api.map.baidu.com/geocoder/v2/?address=' + keyword + '&output=json&ak=Bsr5iefxHEwQD8iCFTx3GwWOem0ZoSBk&city=' + cityName);
-        console.log(cityName, result)
         if (result.status == 0) {
             lat = result.result.location.lat;
             lng = result.result.location.lng;
@@ -103,7 +102,7 @@ function handleKeydown(e) {
         case 'SoftRight':
             getLocation();
             break;
-        case 'Enter': {
+        case 'Enter':
             var radio = $('#api').is(':focus');
             if (radio === true) {
                 var checked = $('#api').is(':checked');
@@ -111,7 +110,6 @@ function handleKeydown(e) {
             }
             else
                 window.location.href = '../city/index.html';
-        }
             break;
     }
 }

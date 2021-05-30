@@ -16,13 +16,15 @@ function realtimeInfo(lid) {
     if (data.jsonr.status == '00') {
         var od = data.jsonr.data.targetOrder;
         var rm = data.jsonr.data.tip.desc;
+        var price = data.jsonr.data.line.price;
         $(item).attr('data-od', od);
+        var html = '<p><label>票价：' + price + '</label>';
         if (rm != '') {
             var r = rm.match(/\d分钟/);
-            if (r != null && r.length > 0) {
-                $(item).append('<p>还有' + r[0] + '到达！</p>');
-            }
+            if (r != null && r.length > 0)
+                html += '<label>还有' + r[0] + '到达！</label></p>';
         }
+        $(item).append(html);
     }
 }
 
@@ -31,7 +33,6 @@ function loadInfo(cid, lat, lng) {
         cid + '&hist=&s=android&sign=&dpi=3&push_open=1&v=5.50.4&lat=' + lat + '&lng=' + lng;
     var result = $.getApi(url, 'text');
     let data = JSON.parse(result.replace("**YGKJ", "").replace("YGKJ##", ""));
-    console.log(data)
     if (data.jsonr.status == "00") {
         var sname = '';
         if (data.jsonr.data.nearSts.length > 0) {
@@ -75,6 +76,10 @@ function handleKeydown(e) {
         case 'Backspace':
         case 'SoftRight':
             window.location.href = '../index.html';
+            break;
+        case 'Enter':
+            $('#container').empty();
+            loadInfo(cid, lat, lng);
             break;
     }
 }
