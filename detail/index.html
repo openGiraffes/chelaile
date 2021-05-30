@@ -11,7 +11,13 @@
 </head>
 
 <body>
-    <div>
+    <div class="tab">
+        <ul>
+            <li tabIndex="0" class="focus">班次</li>
+            <li tabIndex="1">经停</li>
+        </ul>
+    </div>
+    <div id="info">
         <p>
             <label>班车：</label>
             <label id="line"></label>
@@ -29,13 +35,11 @@
             <label id="count"></label>
             <label>&nbsp;辆车</label>
         </p>
+        <div id="container"></div>
     </div>
-    <div id="container">
-
-    </div>
+    <div id="items"></div>
 </body>
 
-<!--导航键-->
 <footer id="softkeys">
     <div id="softkey-left">时间表</div>
     <div id="softkey-center">刷新</div>

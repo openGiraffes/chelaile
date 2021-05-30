@@ -52,8 +52,12 @@ function getCityInfo() {
         }
     }
     else {
-        alert('获取位置失败，请确定已经获取当前位置！');
+        var url = 'https://api.chelaile.net.cn/goocity/city!localCity.action?s=IOS&gpsAccuracy=80.000000&gpstype=wgs&push_open=1&vc=10554&lat=' + lat + '&lng=' + lng;
+        var result = $.getApi(url, 'text');
+        cityInfo = JSON.parse(result.replace("**YGKJ", "").replace("YGKJ##", ""));
     }
+    if (!cityInfo)
+        alert('获取位置失败，请确定已经获取当前位置！');
 }
 
 function getLocation() {
