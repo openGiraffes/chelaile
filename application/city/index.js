@@ -1,8 +1,6 @@
 $(function () {
-    loadAll();
     document.activeElement.addEventListener('keydown', handleKeydown);
-    var h = window.innerHeight - 30;
-    $('#list').height(h);
+    loadAll();
 });
 
 function loadAll() {

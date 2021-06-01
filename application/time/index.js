@@ -1,6 +1,7 @@
 let lid, lng, sid, lat, cid, od;
 
 $(function () {
+    document.activeElement.addEventListener('keydown', handleKeydown);
     od = $.getQueryVar('od');
     lat = $.getQueryVar('lat');
     lng = $.getQueryVar('lng');
@@ -8,7 +9,6 @@ $(function () {
     sid = $.getQueryVar('sid');
     cid = $.getQueryVar('cid');
     loadTimes();
-    document.activeElement.addEventListener('keydown', handleKeydown);
 });
 
 function loadTimes() {
@@ -59,12 +59,10 @@ var current = 0;
 function nav(move) {
     var next = current + move;
     const items = document.querySelectorAll('.item');
-    if (next >= items.length) {
+    if (next >= items.length)
         next = items.length - 1;
-    }
-    else if (next < 0) {
+    else if (next < 0)
         next = 0;
-    }
     const targetElement = items[next];
     if (targetElement) {
         current = next;

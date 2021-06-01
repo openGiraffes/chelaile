@@ -1,10 +1,10 @@
 let cid, lat, lng, sid;
 $(function () {
+    document.activeElement.addEventListener('keydown', handleKeydown);
     cid = $.getQueryVar('cid');
     lat = $.getQueryVar('lat');
     lng = $.getQueryVar('lng');
-    loadInfo(cid, lat, lng);
-    document.activeElement.addEventListener('keydown', handleKeydown);
+    loadInfo();
 });
 
 function realtimeInfo(lid) {
@@ -28,7 +28,7 @@ function realtimeInfo(lid) {
     }
 }
 
-function loadInfo(cid, lat, lng) {
+function loadInfo() {
     var url = 'https://api.chelaile.net.cn/bus/stop!homePageInfo.action?type=1&act=2&gpstype=wgs&gpsAccuracy=80.000000&cityId=' +
         cid + '&hist=&s=android&sign=&dpi=3&push_open=1&v=5.50.4&lat=' + lat + '&lng=' + lng;
     var result = $.getApi(url, 'text');
@@ -88,12 +88,10 @@ var current = 0;
 function nav(move) {
     var next = current + move;
     const items = document.querySelectorAll('.item');
-    if (next >= items.length) {
+    if (next >= items.length)
         next = items.length - 1;
-    }
-    else if (next < 0) {
+    else if (next < 0)
         next = 0;
-    }
     const targetElement = items[next];
     if (targetElement) {
         current = next;
