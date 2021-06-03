@@ -49,6 +49,36 @@ $.extend({
     },
     isEmpty: function (obj) {
         return obj == null || obj == '' || obj == undefined || typeof obj == 'undefined';
+    },
+    setData: function (key, value, temple) {
+        try {
+            if (temple == null || temple == undefined || typeof temple == 'undefined')
+                temple = false;
+            if (temple)
+                sessionStorage.setItem(key, value);
+            else
+                localStorage.setItem(key, value);
+        }
+        catch (e) {
+            console.log(e);
+        }
+    },
+    getData: function (key, temple) {
+        var result = false;
+        try {
+            if (temple == null || temple == undefined || typeof temple == 'undefined')
+                temple = false;
+            if (temple)
+                result = sessionStorage.getItem(key);
+            else
+                result = localStorage.getItem(key);
+        }
+        catch (e) {
+            console.log(e);
+        }
+        if (result == null || result == undefined || typeof result == 'undefined')
+            result = false;
+        return result;
     }
 });
 

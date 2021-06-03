@@ -41,17 +41,27 @@ function gotoPage() {
 }
 
 function getLocation() {
-    $('#gps_city').text('定位中...');
-    if ("geolocation" in navigator) {
-        var options = {
-            enableHighAccuracy: true,
-            timeout: 10000,
-            maximumAge: 0
-        };
-        navigator.geolocation.getCurrentPosition(success, error, options);
+    var pos = $.getData('pos', true);
+    if (pos === false) {
+        $('#gps_city').text('定位中...');
+        if ("geolocation" in navigator) {
+            var options = {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            };
+            navigator.geolocation.getCurrentPosition(success, error, options);
+        }
+        else {
+            alert('没有权限获取当前位置，请手动搜索！');
+        }
     }
     else {
-        alert('没有权限获取当前位置，请手动搜索！');
+        var data = JSON.parse(pos);
+        console.log(data,pos)
+        lat = data.lat;
+        lng = data.lng;
+        getCityInfo();
     }
 }
 
@@ -59,6 +69,11 @@ function success(pos) {
     var crd = pos.coords;
     lat = crd.latitude;
     lng = crd.longitude;
+    getCityInfo();
+    $.setData('pos', JSON.stringify({ lat: lat, lng: lng }), true);
+}
+
+function getCityInfo() {
     var url = 'https://api.chelaile.net.cn/goocity/city!localCity.action?s=IOS&gpsAccuracy=80.000000&gpstype=wgs&push_open=1&vc=10554&lat=' + lat + '&lng=' + lng;
     var result = $.getApi(url, 'text');
     cityInfo = JSON.parse(result.replace("**YGKJ", "").replace("YGKJ##", ""));
