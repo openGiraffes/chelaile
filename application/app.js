@@ -46,6 +46,9 @@ $.extend({
         var unixTimestamp = new Date(timestamp);
         var localString = unixTimestamp.toLocaleString();
         return new Date(localString);
+    },
+    isEmpty: function (obj) {
+        return obj == null || obj == '' || obj == undefined || typeof obj == 'undefined';
     }
 });
 

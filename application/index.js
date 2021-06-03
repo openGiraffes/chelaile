@@ -6,7 +6,6 @@ $(function () {
     var cid = $.getQueryVar('cid');
     if (cid != false) {
         var cname = decodeURIComponent($.getQueryVar('cname'));
-        $('#cid').val(cid);
         $('#gps_city').text(cname);
         $('#lctt').text('城市');
     }
@@ -24,40 +23,21 @@ $(function () {
 });
 
 function gotoPage() {
-    var cid = $('#cid').val();
-    var checked = $('#api').is(':checked');
-    if (cid == '') {
-        if (checked)
-            getCityInfo();
-        else
-            openWeb();
+    if (lat <= 0 && lng <= 0) {
+        alert('请选择或输入地址！');
+        return;
     }
-    else
-        openWeb();
-}
-
-function openWeb() {
-    var cityName = $('#gps_city').text();
-    var web = 'http://web.chelaile.net.cn/ch5/index.html?showFav=1&switchCity=0&utm_source=webapp_meizu_map&showTopLogo=0&gpstype=wgs&src=webapp_meizu_map&utm_medium=menu&showHeader=1&hideFooter=1&cityName=' +
-        cityName + '&cityId=' + cid + '&supportSubway=1&cityVersion=0&lat=&lng=#!/linearound';
-    localStorage.setItem('url', web);
-    window.location.href = '../web/index.html';
-}
-
-function getCityInfo() {
-    if (cityInfo) {
-        if (cityInfo.jsonr.status == '00') {
-            var cityId = cityInfo.jsonr.data.localCity.cityId;
-            window.location.href = '../info/index.html?cid=' + cityId + '&lat=' + lat + '&lng=' + lng;
-        }
-    }
-    else {
+    if ($.isEmpty(cityInfo)) {
         var url = 'https://api.chelaile.net.cn/goocity/city!localCity.action?s=IOS&gpsAccuracy=80.000000&gpstype=wgs&push_open=1&vc=10554&lat=' + lat + '&lng=' + lng;
         var result = $.getApi(url, 'text');
         cityInfo = JSON.parse(result.replace("**YGKJ", "").replace("YGKJ##", ""));
     }
-    if (!cityInfo)
+    if ($.isEmpty(cityInfo))
         alert('获取位置失败，请确定已经获取当前位置！');
+    else if (cityInfo.jsonr.status == '00') {
+        cid = cityInfo.jsonr.data.localCity.cityId;
+        window.location.href = '../info/index.html?cid=' + cid + '&lat=' + lat + '&lng=' + lng;
+    }
 }
 
 function getLocation() {
@@ -106,14 +86,12 @@ function handleKeydown(e) {
         case 'SoftRight':
             getLocation();
             break;
+        case 'Backspace':
+            if (confirm("是否退出？"))
+                window.close();
+            break;
         case 'Enter':
-            var radio = $('#api').is(':focus');
-            if (radio === true) {
-                var checked = $('#api').is(':checked');
-                $('#api').attr('checked', !checked);
-            }
-            else
-                window.location.href = '../city/index.html';
+            window.location.href = '../city/index.html';
             break;
     }
 }

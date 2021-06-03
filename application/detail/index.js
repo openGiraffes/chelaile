@@ -36,7 +36,6 @@ function loadLineInfo() {
         var sn = stations[idx].sn;
         var metros = stations[idx].metros;
         if (metros != null && metros.length > 0) {
-            console.log(metros)
             for (var j = 0; j < metros.length; j++) {
                 var color = metros[j].color;
                 var name = metros[j].fullName;
@@ -51,7 +50,6 @@ function loadDetail() {
         + od + '&lineId=' + lid + '&s=android&geo_lng=' + lng + '&geo_lat=' + lat + '&v=' + ver;
     var result = $.getApi(url, 'text');
     let data = JSON.parse(result.replace("**YGKJ", "").replace("YGKJ##", ""));
-    console.log(data)
     if (data.jsonr.status == '00') {
         var item = data.jsonr.data;
         var rm = item.tip.desc;

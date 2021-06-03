@@ -3,7 +3,7 @@
   "description": "车来了 KaiOS 版",
   "version": "1.0",
   "launch_path": "/index.html",
-  "type": "certified",
+  "type": "privileged",
   "origin": "app://kai.michael.chelaile",
   "icons": {
     "120": "/img/icon120x120.png"
