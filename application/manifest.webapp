@@ -1,6 +1,7 @@
 {
-  "name": "车来了",
-  "description": "车来了 KaiOS 版",
+  "name": "chelaile",
+  "subtitle": "chelaile(third-part)",
+  "description": "chelaile for KaiOS",
   "version": "1.0",
   "launch_path": "/index.html",
   "type": "privileged",
@@ -14,12 +15,25 @@
   },
   "permissions": {
     "attention": {},
-    "browser": {},
-    "mobilenetwork": {},
-    "systemXHR": {},
-    "geolocation": {},
+    "browser": { "description": "Required for browsing webpages" },
+    "mobilenetwork": { "description": "Required data from http" },
+    "systemXHR": {
+      "description": "Required for autocompletion when searching"
+    },
+    "geolocation": {
+      "description":"Get the current location"
+    },
     "spatialnavigation-app-manage": {}
   },
+  "fullscreen": false,
   "ime_default_softkey_bar": true,
-  "theme_color": "#00a1d6"
+  "theme_color": "#00a1d6",
+  "default_locale": "zh-CN",
+  "locales": {
+    "zh-CN": {
+      "name": "车来了",
+      "subtitle": "车来了(第三方)",
+      "description": "车来了KaiOS版"
+    }
+  }
 }
