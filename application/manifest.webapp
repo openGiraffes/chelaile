@@ -2,7 +2,7 @@
   "name": "chelaile",
   "subtitle": "chelaile(third-part)",
   "description": "chelaile for KaiOS",
-  "version": "1.0",
+  "version": "1.0.1",
   "launch_path": "/index.html",
   "type": "privileged",
   "origin": "app://kai.michael.chelaile",
